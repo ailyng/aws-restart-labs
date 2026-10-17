@@ -109,9 +109,18 @@
         /* Filter Controls */
         .filter-container {
             display: flex;
-            gap: 0.5rem;
+            align-items: center;
+            gap: 0.75rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
+        }
+
+        .filter-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .filter-btn {
@@ -194,15 +203,6 @@
             text-transform: uppercase;
         }
 
-        .status-badge {
-            font-size: 0.7rem;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            background-color: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-            font-weight: 600;
-        }
-
         .card h2 {
             font-size: 1.1rem;
             font-weight: 700;
@@ -245,8 +245,6 @@
             <div class="author-info">📍 Ailyn G. · AWS re/Start Scholar</div>
             <div class="social-links">
                 <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
-                <a href="https://github.com/ailyng" target="_blank" class="social-btn">GitHub</a>
-                <a href="#" class="social-btn">Resume</a>
             </div>
         </div>
     </header>
@@ -254,10 +252,11 @@
     <main>
         <!-- Filter Controls -->
         <div class="filter-container">
-            <button class="filter-btn active" onclick="filterCategory('all')">All Labs</button>
-            <button class="filter-btn" onclick="filterCategory('compute')">Compute</button>
-            <button class="filter-btn" onclick="filterCategory('linux')">Linux</button>
-            <button class="filter-btn" onclick="filterCategory('networking')">Networking</button>
+            <span class="filter-label">Categories:</span>
+            <button class="filter-btn active" onclick="filterCategory('all', event)">All Labs</button>
+            <button class="filter-btn" onclick="filterCategory('compute', event)">Compute</button>
+            <button class="filter-btn" onclick="filterCategory('linux', event)">Linux</button>
+            <button class="filter-btn" onclick="filterCategory('networking', event)">Networking</button>
         </div>
 
         <!-- Compute Section -->
@@ -268,7 +267,6 @@
                     <div>
                         <div class="card-header">
                             <span class="card-number">Lab 11</span>
-                            <span class="status-badge">Completed</span>
                         </div>
                         <h2>Introduction to Amazon EC2</h2>
                         <p>Launching, monitoring, configuring security groups, resizing EBS volumes, and terminating EC2 instances.</p>
@@ -290,7 +288,6 @@
                     <div>
                         <div class="card-header">
                             <span class="card-number">Lab 227</span>
-                            <span class="status-badge">Completed</span>
                         </div>
                         <h2>Linux Command Line</h2>
                         <p>Navigating the filesystem, querying system info, manipulating timezones, and using bash history search.</p>
@@ -312,7 +309,6 @@
                     <div>
                         <div class="card-header">
                             <span class="card-number">Lab 263</span>
-                            <span class="status-badge">Completed</span>
                         </div>
                         <h2>Subnets & IP Allocation in VPC</h2>
                         <p>Planning CIDR blocks and engineering isolated subnets within a custom Virtual Private Cloud.</p>
@@ -328,12 +324,14 @@
     </main>
 
     <script>
-        function filterCategory(category) {
+        function filterCategory(category, evt) {
             const sections = document.querySelectorAll('.category-section');
             const buttons = document.querySelectorAll('.filter-btn');
 
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            }
 
             sections.forEach(section => {
                 if (category === 'all' || section.dataset.category === category) {
