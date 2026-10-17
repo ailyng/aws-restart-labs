@@ -3,60 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS re/Start Lab Portfolio</title>
+    <title>Ailyn G. | AWS re/Start Cloud Portfolio</title>
     <style>
         :root {
             --bg-dark: #0f172a;
             --card-bg: #1e293b;
             --border-color: #334155;
-            --accent-orange: #ff9900;
+            --accent-blue: #38bdf8;
+            --accent-blue-hover: #0284c7;
+            --accent-glow: rgba(56, 189, 248, 0.15);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --tag-bg: #0284c7;
+            --tag-bg: #0f172a;
+            --tag-border: #0284c7;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
         }
 
         header {
             max-width: 900px;
-            margin: 0 auto 3rem auto;
+            margin: 0 auto 2.5rem auto;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 2rem;
         }
 
         .badge {
             display: inline-block;
-            background: var(--accent-orange);
-            color: #000;
-            font-weight: bold;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
             font-size: 0.8rem;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
         }
 
         p.subtitle {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .author-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .author-info {
             color: var(--text-muted);
             font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-btn {
+            background-color: var(--card-bg);
+            color: var(--accent-blue);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent-blue);
+            background-color: var(--accent-glow);
+            transform: translateY(-2px);
         }
 
         main {
@@ -64,55 +106,114 @@
             margin: 0 auto;
         }
 
+        /* Filter Controls */
+        .filter-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            color: #ffffff;
+            background-color: var(--accent-blue-hover);
+            border-color: var(--accent-blue);
+        }
+
+        .category-section {
+            margin-bottom: 2.5rem;
+        }
+
         .category-title {
-            color: var(--accent-orange);
-            font-size: 1.4rem;
-            margin: 2rem 0 1rem 0;
-            border-bottom: 2px solid var(--accent-orange);
-            display: inline-block;
-            padding-bottom: 0.2rem;
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--border-color);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
             gap: 1.25rem;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.25rem;
+            border-radius: 10px;
+            padding: 1.35rem;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-orange);
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
         }
 
         .card-number {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
             font-weight: 600;
         }
 
         .card h2 {
-            font-size: 1.15rem;
-            margin: 0.4rem 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             color: var(--text-main);
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             flex-grow: 1;
         }
 
@@ -123,74 +224,125 @@
         }
 
         .tag {
-            background-color: #334155;
-            color: #e2e8f0;
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
+            background-color: var(--tag-bg);
+            color: var(--accent-blue);
+            border: 1px solid var(--border-color);
+            font-size: 0.72rem;
+            padding: 0.2rem 0.55rem;
             border-radius: 4px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <span class="badge">AWS</span>
-        <h1>Lab Reports</h1>
-        <p class="subtitle">Technical documentation of hands-on labs completed during the AWS re/Start program.</p>
-        <div class="author-info">Ailyn G. · AWS re/Start Scholar</div>
+        <span class="badge">AWS re/Start Portfolio</span>
+        <h1>Cloud & Technical Documentation</h1>
+        <p class="subtitle">A hands-on logbook detailing cloud architectures, network configurations, security baselines, and Linux system administration.</p>
+        
+        <div class="author-section">
+            <div class="author-info">📍 Ailyn G. · AWS re/Start Scholar</div>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
+                <a href="https://github.com/ailyng" target="_blank" class="social-btn">GitHub</a>
+                <a href="#" class="social-btn">Resume</a>
+            </div>
+        </div>
     </header>
 
     <main>
-        <!-- Compute Category -->
-        <h2 class="category-title">Compute</h2>
-        <div class="grid">
-            <a href="lab-11-ec2/index.html" class="card">
-                <div>
-                    <span class="card-number">Lab 11</span>
-                    <h2>Introduction to Amazon EC2</h2>
-                    <p>Launching, monitoring, configuring security, resizing, and safely terminating an EC2 instance.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">EC2</span>
-                    <span class="tag">Security Groups</span>
-                    <span class="tag">EBS</span>
-                </div>
-            </a>
+        <!-- Filter Controls -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterCategory('all')">All Labs</button>
+            <button class="filter-btn" onclick="filterCategory('compute')">Compute</button>
+            <button class="filter-btn" onclick="filterCategory('linux')">Linux</button>
+            <button class="filter-btn" onclick="filterCategory('networking')">Networking</button>
         </div>
 
-        <!-- Linux Category -->
-        <h2 class="category-title">Linux Fundamentals</h2>
-        <div class="grid">
-            <a href="lab-227-linux-cli/index.html" class="card">
-                <div>
-                    <span class="card-number">Lab 227</span>
-                    <h2>Linux Command Line</h2>
-                    <p>System info commands, timezone dates, Julian calendars, and bash history search.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">Bash</span>
-                    <span class="tag">System Info</span>
-                </div>
-            </a>
+        <!-- Compute Section -->
+        <div class="category-section" data-category="compute">
+            <h2 class="category-title">Compute</h2>
+            <div class="grid">
+                <a href="lab-11-ec2/index.html" class="card">
+                    <div>
+                        <div class="card-header">
+                            <span class="card-number">Lab 11</span>
+                            <span class="status-badge">Completed</span>
+                        </div>
+                        <h2>Introduction to Amazon EC2</h2>
+                        <p>Launching, monitoring, configuring security groups, resizing EBS volumes, and terminating EC2 instances.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">EC2</span>
+                        <span class="tag">Security Groups</span>
+                        <span class="tag">EBS</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
-        <!-- Networking Category -->
-        <h2 class="category-title">Networking</h2>
-        <div class="grid">
-            <a href="lab-263-networking-vpc/index.html" class="card">
-                <div>
-                    <span class="card-number">Lab 263</span>
-                    <h2>Create Subnets and Allocate IPs in a VPC</h2>
-                    <p>Planning CIDR blocks and creating a VPC with a public subnet using the VPC Wizard.</p>
-                </div>
-                <div class="tags">
-                    <span class="tag">VPC</span>
-                    <span class="tag">Subnets</span>
-                    <span class="tag">CIDR</span>
-                </div>
-            </a>
+        <!-- Linux Section -->
+        <div class="category-section" data-category="linux">
+            <h2 class="category-title">Linux Fundamentals</h2>
+            <div class="grid">
+                <a href="lab-227-linux-cli/index.html" class="card">
+                    <div>
+                        <div class="card-header">
+                            <span class="card-number">Lab 227</span>
+                            <span class="status-badge">Completed</span>
+                        </div>
+                        <h2>Linux Command Line</h2>
+                        <p>Navigating the filesystem, querying system info, manipulating timezones, and using bash history search.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Bash</span>
+                        <span class="tag">CLI</span>
+                        <span class="tag">System Info</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Networking Section -->
+        <div class="category-section" data-category="networking">
+            <h2 class="category-title">Networking & VPC</h2>
+            <div class="grid">
+                <a href="lab-263-networking-vpc/index.html" class="card">
+                    <div>
+                        <div class="card-header">
+                            <span class="card-number">Lab 263</span>
+                            <span class="status-badge">Completed</span>
+                        </div>
+                        <h2>Subnets & IP Allocation in VPC</h2>
+                        <p>Planning CIDR blocks and engineering isolated subnets within a custom Virtual Private Cloud.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">VPC</span>
+                        <span class="tag">Subnets</span>
+                        <span class="tag">CIDR</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </main>
 
+    <script>
+        function filterCategory(category) {
+            const sections = document.querySelectorAll('.category-section');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            sections.forEach(section => {
+                if (category === 'all' || section.dataset.category === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
